@@ -1,0 +1,239 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI';
+  box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --BTN-COLOR: #006fff;
+  --NAVBAR-COLOR: #006fff;
+  --BORDER-COLOR: #c4c4c4;
+}
+
+h1,
+h2 {
+  color: #1b1b1b;
+  font-weight: 400;
+}
+
+a {
+  text-decoration: none;
+}
+
+form {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  height: 45px;
+  border: 1px solid var(--BORDER-COLOR);
+  border-bottom: none;
+  padding-inline: 10px;
+  font-size: 16px;
+}
+
+input:focus {
+  outline: none;
+}
+
+input:first-of-type {
+  border-radius: 6px 6px 0px 0px;
+}
+
+input:last-of-type {
+  border-radius: 0px 0px 6px 6px;
+  border-bottom: 1px solid var(--BORDER-COLOR);
+}
+
+button {
+  margin-top: 15px;
+  height: 45px;
+  background-color: var(--BTN-COLOR);
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  transition: opacity 0.2s ease-in-out;
+}
+
+button:hover {
+  opacity: 0.85;
+  cursor: pointer;
+}
+
+/* Root page */
+.root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  height: 60px;
+  background-color: var(--NAVBAR-COLOR);
+  background-color: #006fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  padding-inline: 40px;
+}
+
+.topbar a {
+  color: #fff;
+}
+
+.site-logo {
+  font-size: 24px;
+}
+
+.topbar > p {
+  color: #fff;
+  flex: 1;
+  position: relative;
+  top: 2px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.container {
+  flex: 1;
+  padding: 50px;
+}
+
+/* Profile page */
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 450px;
+}
+
+.search-form input {
+  border-radius: 6px 0px 0px 6px;
+  flex: 1;
+  padding-inline-start: 15px;
+}
+
+.search-form button {
+  margin-top: 0px;
+  border-radius: 0px 6px 6px 0px;
+  padding-inline: 15px;
+}
+
+.profile {
+  display: flex;
+  align-items: flex-start;
+  gap: 35px;
+}
+
+.user {
+  width: 350px;
+  border: 1px solid var(--BORDER-COLOR);
+  border-radius: 8px;
+}
+
+.user > img {
+  width: 100%;
+  border-radius: 8px 8px 0px 0px;
+}
+
+.user-info {
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.user-info > h1 {
+  font-size: 25px;
+}
+
+.user-info > :nth-child(3) {
+  display: flex;
+  gap: 15px;
+}
+
+.user-info > a {
+  color: #000;
+}
+
+.user-info > a:hover {
+  color: #006fff;
+}
+
+.repos {
+  width: 100%;
+  max-width: 600px;
+  border: 1px solid var(--BORDER-COLOR);
+  border-radius: 8px;
+}
+
+.repo {
+  border-bottom: 1px solid var(--BORDER-COLOR);
+  padding: 15px 20px;
+}
+
+.repo > h2 {
+  font-size: 22px;
+}
+
+.repo > p {
+  margin-top: 10px;
+}
+
+.repo:last-of-type {
+  border: none;
+}
+
+/* Signup and Login pages */
+.signup-page,
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 35px;
+}
+
+.signup-page h1,
+.login-page h1 {
+  font-size: 30px;
+}
+
+.signup-error,
+.login-error {
+  font-size: 18px;
+}
+
+.signup-link {
+  margin-top: -8px;
+  font-size: 17px;
+}
+
+.signup-link > a {
+  color: #616161;
+}
+
+.signup-link > a:hover {
+  text-decoration: underline;
+}
