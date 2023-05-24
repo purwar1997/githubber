@@ -29,37 +29,45 @@ export default function Profile() {
         <button type='submit'>Search</button>
       </Form>
 
-      <div className='profile'>
-        <div className='user'>
-          <img src={user.avatar_url} alt={user.login} />
+      {user.id ? (
+        <div className='profile'>
+          <div className='user'>
+            <img src={user.avatar_url} alt={user.login} />
 
-          <div className='user-info'>
-            <h1>{user.name}</h1>
-            <p>{user.bio}</p>
-            <div>
-              <span>{user.followers} followers</span>
-              <span>{user.following} following</span>
+            <div className='user-info'>
+              <h1>{user.name}</h1>
+              <p>{user.bio}</p>
+              <div>
+                <span>{user.followers} followers</span>
+                <span>{user.following} following</span>
+              </div>
+              <p>{user.location}</p>
+              <a href={user.blog} target='_blank'>
+                {user.blog}
+              </a>
+              <a href={`https://twitter.com/${user.twitter_username}`} target='_blank'>
+                @{user.twitter_username}
+              </a>
             </div>
-            <p>{user.location}</p>
-            <a href={user.blog} target='_blank'>
-              {user.blog}
-            </a>
-            <a href={`https://twitter.com/${user.twitter_username}`} target='_blank'>
-              @{user.twitter_username}
-            </a>
           </div>
-        </div>
 
-        <div className='repos'>
-          {repos.map(repo => (
-            <div className='repo' key={repo.id}>
-              <h2>{repo.name}</h2>
-              <p>{repo.description}</p>
-              <p>Language used : {repo.language}</p>
+          {repos.length ? (
+            <div className='repos'>
+              {repos.map(repo => (
+                <div className='repo' key={repo.id}>
+                  <h2>{repo.name}</h2>
+                  <p>{repo.description}</p>
+                  <p>Language used : {repo.language}</p>
+                </div>
+              ))}
             </div>
-          ))}
+          ) : (
+            <h1>No repositories found</h1>
+          )}
         </div>
-      </div>
+      ) : (
+        <h1>User not found</h1>
+      )}
     </section>
   );
 }

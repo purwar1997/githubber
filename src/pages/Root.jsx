@@ -1,7 +1,9 @@
 import { Link, Outlet, useLoaderData } from 'react-router-dom';
 
 export async function loader() {
-  return localStorage.getItem('loggedInUser');
+  const user = localStorage.getItem('loggedInUser');
+
+  // if (user)
 }
 
 export default function Root() {
@@ -15,7 +17,6 @@ export default function Root() {
         </Link>
 
         {/* {isLoggedIn && <p>Welcome, Shubham</p>} */}
-        <p>Welcome, Shubham</p>
 
         <nav className='nav-links'>
           {/* {isLoggedIn ? (
