@@ -11,7 +11,7 @@ export default function Root() {
   return (
     <main className='root'>
       <header className='topbar'>
-        <Link to='/' className='site-logo'>
+        <Link to='.' className='site-logo'>
           GitHubber
         </Link>
 
@@ -20,7 +20,7 @@ export default function Root() {
         <nav className='nav-links'>
           {user ? (
             <Form action='logout' method='post'>
-              <button>Logout</button>
+              <button className='logout-btn'>Logout</button>
             </Form>
           ) : (
             <>

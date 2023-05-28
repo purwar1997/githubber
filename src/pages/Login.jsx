@@ -1,4 +1,4 @@
-import { Form, Link, redirect, useActionData } from 'react-router-dom';
+import { Form, Link, redirect, useActionData, useNavigation } from 'react-router-dom';
 import { login } from '../api';
 
 export async function action({ request }) {
@@ -16,6 +16,7 @@ export async function action({ request }) {
 
 export default function Login() {
   const error = useActionData();
+  const navigation = useNavigation();
 
   return (
     <section className='login-page'>
@@ -24,7 +25,9 @@ export default function Login() {
       <Form method='post'>
         <input type='email' name='email' placeholder='Email address' />
         <input type='password' name='password' placeholder='Password' />
-        <button type='submit'>Login</button>
+        <button type='submit'>
+          {navigation.state === 'submitting' ? 'Logging in...' : 'Login'}
+        </button>
       </Form>
 
       {error && <p className='login-error'>{error.message}</p>}

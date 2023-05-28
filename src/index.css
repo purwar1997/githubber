@@ -14,6 +14,7 @@
   --BTN-COLOR: #006fff;
   --NAVBAR-COLOR: #006fff;
   --BORDER-COLOR: #c4c4c4;
+  --ERROR-COLOR: #dc143c;
 }
 
 h1,
@@ -84,7 +85,7 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 40px;
+  gap: 50px;
   padding-inline: 40px;
 }
 
@@ -105,7 +106,15 @@ button:hover {
 
 .nav-links {
   display: flex;
-  gap: 25px;
+  gap: 30px;
+}
+
+.logout-btn {
+  margin-top: 0px;
+}
+
+.logout-btn:hover {
+  opacity: unset;
 }
 
 .container {
@@ -167,7 +176,7 @@ button:hover {
 }
 
 .user-info {
-  padding: 15px 20px;
+  padding: 18px 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -180,7 +189,7 @@ button:hover {
 
 .user-info > :nth-child(3) {
   display: flex;
-  gap: 15px;
+  gap: 18px;
 }
 
 .user-info > a {
@@ -204,7 +213,7 @@ button:hover {
 }
 
 .repo > h2 {
-  font-size: 22px;
+  font-size: 21px;
 }
 
 .repo > p {
@@ -232,10 +241,11 @@ button:hover {
 .signup-error,
 .login-error {
   font-size: 18px;
+  color: var(--ERROR-COLOR);
+  margin-bottom: -10px;
 }
 
 .signup-link {
-  margin-top: -8px;
   font-size: 17px;
 }
 
