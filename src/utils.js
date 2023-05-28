@@ -1,3 +1,5 @@
+import { redirect } from 'react-router-dom';
+
 export async function getUser(githubId) {
   try {
     const res = await fetch(`https://api.github.com/users/${githubId}`);
@@ -17,5 +19,13 @@ export async function getRepos(githubId) {
     return repos;
   } catch (err) {
     throw new Error(err.message || 'Error fetching github repositories');
+  }
+}
+
+export async function authRequired() {
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  if (!user) {
+    throw redirect('/login');
   }
 }

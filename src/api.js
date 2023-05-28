@@ -1,14 +1,5 @@
 import db from './firebase.config';
-import {
-  collection,
-  Timestamp,
-  addDoc,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  where,
-} from 'firebase/firestore';
+import { collection, Timestamp, addDoc, getDoc, getDocs, query, where } from 'firebase/firestore';
 import { getUser } from './utils';
 
 const usersRef = collection(db, 'users');
@@ -47,4 +38,32 @@ export async function signup(credentials) {
   user.password = undefined;
 
   return user;
+}
+
+export async function login(credentials) {
+  const { email, password } = credentials;
+
+  if (!email || !password) {
+    throw new Error('Please enter all the details');
+  }
+
+  const q = query(usersRef, where('email', '==', email));
+  const querySnapshot = await getDocs(q);
+
+  if (querySnapshot.empty) {
+    throw new Error('Email not registered');
+  }
+
+  const user = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))[0];
+
+  if (password !== user.password) {
+    throw new Error('Incorrect password');
+  }
+
+  user.password = undefined;
+
+  return {
+    user,
+    token: 'This is a dummy token',
+  };
 }

@@ -1,17 +1,33 @@
-import { Form, Link } from 'react-router-dom';
+import { Form, Link, redirect, useActionData } from 'react-router-dom';
+import { login } from '../api';
+
+export async function action({ request }) {
+  const formData = await request.formData();
+  const credentials = Object.fromEntries(formData.entries());
+
+  try {
+    const { user } = await login(credentials);
+    localStorage.setItem('user', JSON.stringify(user));
+    return redirect('/');
+  } catch (err) {
+    return err;
+  }
+}
 
 export default function Login() {
+  const error = useActionData();
+
   return (
     <section className='login-page'>
       <h1>Login to your account</h1>
 
-      <Form>
+      <Form method='post'>
         <input type='email' name='email' placeholder='Email address' />
         <input type='password' name='password' placeholder='Password' />
         <button type='submit'>Login</button>
       </Form>
 
-      <p className='login-error'>Please enter all the details</p>
+      {error && <p className='login-error'>{error.message}</p>}
 
       <p className='signup-link'>
         Don't have an account? <Link to='/signup'>Signup</Link>

@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 import { Form, useLoaderData } from 'react-router-dom';
-import { getUser, getRepos } from '../utils';
+import { getUser, getRepos, authRequired } from '../utils';
 
 export async function loader({ request }) {
+  await authRequired();
+
   let query = new URL(request.url).searchParams.get('query');
   let github = query;
 
   if (!github) {
-    github = localStorage.getItem('loggedInUser');
+    github = JSON.parse(localStorage.getItem('user')).github;
   }
 
   const user = await getUser(github);

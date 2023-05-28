@@ -5,20 +5,22 @@ import {
   Route,
 } from 'react-router-dom';
 
-import Root from './pages/Root';
+import Root, { loader as rootLoader } from './pages/Root';
 import Profile, { loader as profileLoader } from './pages/Profile';
-import Login from './pages/Login';
+import Login, { action as loginAction } from './pages/Login';
 import Signup, { action as signupAction } from './pages/Signup';
+import { action as logoutAction } from './pages/Logout';
 import NotFound from './pages/NotFound';
 import Error from './components/Error';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path='/' element={<Root />} errorElement={<Error />}>
+      <Route path='/' element={<Root />} loader={rootLoader} errorElement={<Error />}>
         <Route index element={<Profile />} loader={profileLoader} />
-        <Route path='login' element={<Login />} />
+        <Route path='login' element={<Login />} action={loginAction} />
         <Route path='signup' element={<Signup />} action={signupAction} />
+        <Route path='logout' action={logoutAction} />
       </Route>
       <Route path='*' element={<NotFound />} />
     </>

@@ -1,13 +1,12 @@
-import { Link, Outlet, useLoaderData } from 'react-router-dom';
+import { Form, Link, Outlet, useLoaderData } from 'react-router-dom';
 
 export async function loader() {
-  const user = localStorage.getItem('loggedInUser');
-
-  // if (user)
+  const user = JSON.parse(localStorage.getItem('user'));
+  return user;
 }
 
 export default function Root() {
-  const loggedInUser = useLoaderData();
+  const user = useLoaderData();
 
   return (
     <main className='root'>
@@ -16,20 +15,19 @@ export default function Root() {
           GitHubber
         </Link>
 
-        {/* {isLoggedIn && <p>Welcome, Shubham</p>} */}
+        {user && <p>Welcome, {user.github}</p>}
 
         <nav className='nav-links'>
-          {/* {isLoggedIn ? (
-            <Link to='logout'>Logout</Link>
+          {user ? (
+            <Form action='logout' method='post'>
+              <button>Logout</button>
+            </Form>
           ) : (
             <>
               <Link to='login'>Sign in</Link>
               <Link to='signup'>Sign up</Link>
             </>
-          )} */}
-          <Link to='login'>Sign in</Link>
-          <Link to='signup'>Sign up</Link>
-          <Link to='logout'>Logout</Link>
+          )}
         </nav>
       </header>
 
