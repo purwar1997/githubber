@@ -8,7 +8,7 @@ import {
 import Root from './pages/Root';
 import Profile, { loader as profileLoader } from './pages/Profile';
 import Login from './pages/Login';
-import Signup from './pages/Signup';
+import Signup, { action as signupAction } from './pages/Signup';
 import NotFound from './pages/NotFound';
 import Error from './components/Error';
 
@@ -18,7 +18,7 @@ const router = createBrowserRouter(
       <Route path='/' element={<Root />} errorElement={<Error />}>
         <Route index element={<Profile />} loader={profileLoader} />
         <Route path='login' element={<Login />} />
-        <Route path='signup' element={<Signup />} />
+        <Route path='signup' element={<Signup />} action={signupAction} />
       </Route>
       <Route path='*' element={<NotFound />} />
     </>

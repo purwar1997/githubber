@@ -62,11 +62,11 @@ export default function Profile() {
               ))}
             </div>
           ) : (
-            <h1>No repositories found</h1>
+            <p>No repositories found</p>
           )}
         </div>
       ) : (
-        <h1>User not found</h1>
+        <p>No user found</p>
       )}
     </section>
   );

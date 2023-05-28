@@ -1,6 +1,22 @@
-import { Form } from 'react-router-dom';
+import { Form, redirect, useActionData, useNavigation } from 'react-router-dom';
+import { signup } from '../api';
+
+export async function action({ request }) {
+  const formData = await request.formData();
+  const credentials = Object.fromEntries(formData.entries());
+
+  try {
+    await signup(credentials);
+    return redirect('/login');
+  } catch (err) {
+    return err;
+  }
+}
 
 export default function Signup() {
+  const error = useActionData();
+  const navigation = useNavigation();
+
   return (
     <section className='signup-page'>
       <h1>Signup to create your account</h1>
@@ -9,10 +25,12 @@ export default function Signup() {
         <input type='text' name='github' placeholder='Github' />
         <input type='email' name='email' placeholder='Email address' />
         <input type='password' name='password' placeholder='Password' />
-        <button type='submit'>Signup</button>
+        <button type='submit'>
+          {navigation.state === 'submitting' ? 'Signing up...' : 'Signup'}
+        </button>
       </Form>
 
-      <p className='signup-error'>Please enter all the details</p>
+      {error && <p className='signup-error'>{error.message}</p>}
     </section>
   );
 }

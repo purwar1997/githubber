@@ -1,5 +1,14 @@
 import db from './firebase.config';
-import { collection, Timestamp, addDoc, doc, getDoc } from 'firebase/firestore';
+import {
+  collection,
+  Timestamp,
+  addDoc,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from 'firebase/firestore';
 import { getUser } from './utils';
 
 const usersRef = collection(db, 'users');
@@ -11,14 +20,21 @@ export async function signup(credentials) {
     throw new Error('Please enter all the details');
   }
 
-  try {
-    await getUser(github);
-  } catch (err) {
-    throw new Error('Invalid github id');
+  let user = await getUser(github);
+
+  if (!user.id) {
+    throw new Error('Github account not found');
   }
 
   if (password.length < 8) {
-    throw new Error('Password must be 8 characters long');
+    throw new Error('Password must be atleast 8 characters long');
+  }
+
+  const q = query(usersRef, where('email', '==', email));
+  const querySnapshot = await getDocs(q);
+
+  if (!querySnapshot.empty) {
+    throw new Error('Email already registered');
   }
 
   const docRef = await addDoc(usersRef, {
@@ -27,7 +43,8 @@ export async function signup(credentials) {
   });
 
   const docSnap = await getDoc(docRef);
-  console.log(docSnap.id, docSnap.data());
+  user = { id: docSnap.id, ...docSnap.data };
+  user.password = undefined;
 
-  //   const newDocRef = doc(db, )
+  return user;
 }

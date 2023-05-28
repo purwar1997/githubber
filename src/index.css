@@ -121,6 +121,11 @@ button:hover {
   gap: 60px;
 }
 
+.profile-page > p {
+  margin-top: -20px;
+  font-size: 18px;
+}
+
 .search-form {
   display: flex;
   flex-direction: row;
@@ -144,6 +149,10 @@ button:hover {
   display: flex;
   align-items: flex-start;
   gap: 35px;
+}
+
+.profile > p {
+  font-size: 20px;
 }
 
 .user {
