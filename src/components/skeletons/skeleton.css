@@ -1,0 +1,31 @@
+.skeleton {
+  background-color: rgb(210, 210, 210);
+  border-radius: 10px;
+}
+
+.animation {
+  animation: pulse 2s linear infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.skeleton-profile {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 25px;
+}
+
+.left {
+  width: 350px;
+  height: 450px;
+}
+
+.right {
+  width: 600px;
+  height: 750px;
+}

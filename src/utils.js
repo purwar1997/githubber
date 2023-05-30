@@ -1,13 +1,7 @@
 import { redirect } from 'react-router-dom';
 
-async function delay() {
-  return new Promise(resolve => setTimeout(resolve, 1000));
-}
-
 export async function getUser(githubId) {
   try {
-    // await delay();
-
     let res = await fetch(`https://api.github.com/users/${githubId}`);
     const user = await res.json();
 

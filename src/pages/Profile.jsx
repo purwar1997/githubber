@@ -1,6 +1,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { Form, useLoaderData, useNavigation, defer, Await, useAsyncValue } from 'react-router-dom';
 import { getUser, authRequired } from '../utils';
+import SkeletonProfile from '../components/skeletons/SkeletonProfile';
 
 export async function loader({ request }) {
   await authRequired();
@@ -26,7 +27,7 @@ export default function Profile() {
   }, [query]);
 
   if (navigation.state === 'loading') {
-    return <h1>Loading...</h1>;
+    return <SkeletonProfile />;
   }
 
   return (
@@ -45,7 +46,7 @@ export default function Profile() {
         </button>
       </Form>
 
-      <Suspense fallback={<h1>Loading...</h1>}>
+      <Suspense fallback={<SkeletonProfile />}>
         <Await resolve={user}>
           <RenderProfile />
         </Await>
