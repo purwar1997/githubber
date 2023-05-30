@@ -1,7 +1,7 @@
 import { redirect } from 'react-router-dom';
 
 async function delay() {
-  return new Promise(resolve => setTimeout(resolve, 3000));
+  return new Promise(resolve => setTimeout(resolve, 1000));
 }
 
 export async function getUser(githubId) {
@@ -11,7 +11,7 @@ export async function getUser(githubId) {
     let res = await fetch(`https://api.github.com/users/${githubId}`);
     const user = await res.json();
 
-    res = await fetch(`${user.repos_url}?per_page=100&sort=pushed`);
+    res = await fetch(`https://api.github.com/users/${githubId}/repos?per_page=100&sort=pushed`);
     const repos = await res.json();
 
     return { user, repos };
@@ -21,7 +21,7 @@ export async function getUser(githubId) {
 }
 
 export async function authRequired() {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('loggedInUser'));
 
   if (!user) {
     throw redirect('/login');

@@ -7,7 +7,7 @@ export async function action({ request }) {
 
   try {
     await signup(credentials);
-    return redirect('/login');
+    return redirect('/login?message=Now you need to login');
   } catch (err) {
     return err;
   }
@@ -21,7 +21,7 @@ export default function Signup() {
     <section className='signup-page'>
       <h1>Signup to create your account</h1>
 
-      <Form method='post'>
+      <Form method='post' replace>
         <input type='text' name='github' placeholder='Github' />
         <input type='email' name='email' placeholder='Email address' />
         <input type='password' name='password' placeholder='Password' />

@@ -1,15 +1,15 @@
-import { Suspense, useEffect } from 'react';
-import { Form, useLoaderData, Await, defer, useAsyncValue } from 'react-router-dom';
+import { useState, useEffect, Suspense } from 'react';
+import { Form, useLoaderData, useNavigation, defer, Await, useAsyncValue } from 'react-router-dom';
 import { getUser, authRequired } from '../utils';
 
 export async function loader({ request }) {
   await authRequired();
 
   let query = new URL(request.url).searchParams.get('query');
-  let github = query;
+  let github = query?.trim();
 
   if (!github) {
-    github = JSON.parse(localStorage.getItem('user')).github;
+    github = JSON.parse(localStorage.getItem('loggedInUser'))?.github;
   }
 
   const user = getUser(github);
@@ -18,29 +18,48 @@ export async function loader({ request }) {
 
 export default function Profile() {
   const { user, query } = useLoaderData();
+  const [search, setSearch] = useState('');
+  const navigation = useNavigation();
 
   useEffect(() => {
     document.getElementById('search').value = query;
   }, [query]);
 
+  if (navigation.state === 'loading') {
+    return <h1>Loading...</h1>;
+  }
+
   return (
     <section className='profile-page'>
       <Form className='search-form'>
-        <input type='search' id='search' name='query' placeholder='Search' defaultValue={query} />
-        <button type='submit'>Search</button>
+        <input
+          type='search'
+          id='search'
+          name='query'
+          placeholder='Search'
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+        />
+        <button type='submit' disabled={search.trim() === ''}>
+          Search
+        </button>
       </Form>
 
-      <Suspense fallback={<h1>Loading profile...</h1>}>
+      <Suspense fallback={<h1>Loading...</h1>}>
         <Await resolve={user}>
-          <LoadProfile />
+          <RenderProfile />
         </Await>
       </Suspense>
     </section>
   );
 }
 
-function LoadProfile() {
+function RenderProfile() {
   const { user, repos } = useAsyncValue();
+
+  if (!user.id) {
+    return <p>No user found</p>;
+  }
 
   return (
     <div className='profile'>

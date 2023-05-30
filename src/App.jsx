@@ -7,7 +7,7 @@ import {
 
 import Root, { loader as rootLoader } from './pages/Root';
 import Profile, { loader as profileLoader } from './pages/Profile';
-import Login, { action as loginAction } from './pages/Login';
+import Login, { loader as loginLoader, action as loginAction } from './pages/Login';
 import Signup, { action as signupAction } from './pages/Signup';
 import { action as logoutAction } from './pages/Logout';
 import NotFound from './pages/NotFound';
@@ -18,7 +18,7 @@ const router = createBrowserRouter(
     <>
       <Route path='/' element={<Root />} loader={rootLoader} errorElement={<Error />}>
         <Route index element={<Profile />} loader={profileLoader} />
-        <Route path='login' element={<Login />} action={loginAction} />
+        <Route path='login' element={<Login />} loader={loginLoader} action={loginAction} />
         <Route path='signup' element={<Signup />} action={signupAction} />
         <Route path='logout' action={logoutAction} />
       </Route>

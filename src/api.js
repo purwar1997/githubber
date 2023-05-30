@@ -11,7 +11,7 @@ export async function signup(credentials) {
     throw new Error('Please enter all the details');
   }
 
-  let user = await getUser(github);
+  let { user } = await getUser(github);
 
   if (!user.id) {
     throw new Error('Github account not found');

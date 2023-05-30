@@ -1,7 +1,7 @@
 import { Form, Link, Outlet, useLoaderData } from 'react-router-dom';
 
 export async function loader() {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('loggedInUser'));
   return user;
 }
 
@@ -20,7 +20,9 @@ export default function Root() {
         <nav className='nav-links'>
           {user ? (
             <Form action='logout' method='post'>
-              <button className='logout-btn'>Logout</button>
+              <button className='logout-btn' type='submit'>
+                Logout
+              </button>
             </Form>
           ) : (
             <>
