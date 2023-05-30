@@ -17,10 +17,12 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path='/' element={<Root />} loader={rootLoader} errorElement={<Error />}>
-        <Route index element={<Profile />} loader={profileLoader} />
-        <Route path='login' element={<Login />} loader={loginLoader} action={loginAction} />
-        <Route path='signup' element={<Signup />} action={signupAction} />
-        <Route path='logout' action={logoutAction} />
+        <Route errorElement={<Error />}>
+          <Route index element={<Profile />} loader={profileLoader} />
+          <Route path='login' element={<Login />} loader={loginLoader} action={loginAction} />
+          <Route path='signup' element={<Signup />} action={signupAction} />
+          <Route path='logout' action={logoutAction} />
+        </Route>
       </Route>
       <Route path='*' element={<NotFound />} />
     </>

@@ -6,7 +6,7 @@ async function delay() {
 
 export async function getUser(githubId) {
   try {
-    await delay();
+    // await delay();
 
     let res = await fetch(`https://api.github.com/users/${githubId}`);
     const user = await res.json();

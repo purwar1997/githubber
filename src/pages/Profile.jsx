@@ -5,11 +5,11 @@ import { getUser, authRequired } from '../utils';
 export async function loader({ request }) {
   await authRequired();
 
-  let query = new URL(request.url).searchParams.get('query');
+  const query = new URL(request.url).searchParams.get('query');
   let github = query?.trim();
 
   if (!github) {
-    github = JSON.parse(localStorage.getItem('loggedInUser'))?.github;
+    github = JSON.parse(localStorage.getItem('loggedInUser')).github;
   }
 
   const user = getUser(github);
@@ -17,8 +17,8 @@ export async function loader({ request }) {
 }
 
 export default function Profile() {
-  const { user, query } = useLoaderData();
   const [search, setSearch] = useState('');
+  const { user, query } = useLoaderData();
   const navigation = useNavigation();
 
   useEffect(() => {

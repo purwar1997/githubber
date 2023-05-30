@@ -256,3 +256,41 @@ button:hover {
 .signup-link > a:hover {
   text-decoration: underline;
 }
+
+/* Not Found page */
+.not-found-page {
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.not-found-page > h1 {
+  font-size: 30px;
+}
+
+.not-found-page > a {
+  font-size: 18px;
+}
+
+.not-found-page > a:hover {
+  text-decoration: underline;
+}
+
+/* Error component */
+.error-container {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.error-container > h1 {
+  font-size: 32px;
+}
+
+.error-message {
+  font-style: italic;
+}
