@@ -41,7 +41,7 @@ export default function Profile() {
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
-        <button type='submit' disabled={search.trim() === ''}>
+        <button type='submit' disabled={search === null || search.trim() === ''}>
           Search
         </button>
       </Form>
@@ -69,15 +69,22 @@ function RenderProfile() {
 
         <div className='user-info'>
           <h1>{user.name}</h1>
-          <p>{user.bio}</p>
-          <div>
+
+          {user.bio && <p>{user.bio}</p>}
+
+          <div className='follows'>
             <span>{user.followers} followers</span>
             <span>{user.following} following</span>
           </div>
-          <p>{user.location}</p>
-          <a href={user.blog} target='_blank'>
-            {user.blog}
-          </a>
+
+          {user.location && <p>{user.location}</p>}
+
+          {user.blog && (
+            <a href={user.blog} target='_blank'>
+              {user.blog}
+            </a>
+          )}
+
           {user.twitter_username && (
             <a href={`https://twitter.com/${user.twitter_username}`} target='_blank'>
               @{user.twitter_username}

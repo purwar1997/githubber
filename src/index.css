@@ -187,7 +187,7 @@ button:hover {
   font-size: 25px;
 }
 
-.user-info > :nth-child(3) {
+.follows {
   display: flex;
   gap: 18px;
 }
