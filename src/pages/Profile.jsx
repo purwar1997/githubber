@@ -7,13 +7,13 @@ export async function loader({ request }) {
   await authRequired();
 
   const query = new URL(request.url).searchParams.get('query');
-  let github = query?.trim();
+  let githubId = query?.trim();
 
-  if (!github) {
-    github = JSON.parse(localStorage.getItem('loggedInUser')).github;
+  if (!githubId) {
+    githubId = JSON.parse(localStorage.getItem('loggedInUser')).github;
   }
 
-  const user = getUser(github);
+  const user = getUser(githubId);
   return defer({ user, query });
 }
 
