@@ -81,7 +81,6 @@ button:hover {
 .topbar {
   height: 60px;
   background-color: var(--NAVBAR-COLOR);
-  background-color: #006fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
